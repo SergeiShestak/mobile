@@ -15,6 +15,10 @@
         Title="Table"
         ContentTemplate="{DataTemplate local:TablePage}"
         Route="TablePage" />
+    <ShellContent
+        Title="User Input"
+        ContentTemplate="{DataTemplate local:UserInputPage}"
+        Route="UserInputPage" />
 </TabBar>
 
 </Shell>

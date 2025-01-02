@@ -2,7 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AndroidMobileFirst.Views.TablePage">
 
-    <ScrollView>
+    <StackLayout>
+        <Button Text="Add Record" Clicked="OnAddRecordButtonClicked" />
+    </StackLayout>
+
+    <!-- <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
             <Label Text="Data Table" 
                    Style="{StaticResource Headline}" 
@@ -33,6 +37,6 @@
                 </TableRoot>
             </TableView>
         </VerticalStackLayout>
-    </ScrollView>
+    </ScrollView> -->
 
 </ContentPage>
