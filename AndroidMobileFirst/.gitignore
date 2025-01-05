@@ -48,7 +48,12 @@ Generated\ Files/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+
+# MAUI auto generated files
+platforms/
+bin/
+obj/
+AppPackages/
 
 # NUnit
 *.VisualState.xml

@@ -14,20 +14,25 @@
                 SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
             <Label
-                Text="Hello From Your Manager!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
+                x:Name="ResponseLabel"
+                Text="Response will be displayed here"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="Response from OllamaService" />
+
+            <Label
+                Text="Your Response:"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2" />
+
+            <StackLayout Orientation="Horizontal">
+                <RadioButton x:Name="Option1" Content="Option 1" GroupName="UserResponse" />
+                <RadioButton x:Name="Option2" Content="Option 2" GroupName="UserResponse" />
+            </StackLayout>
 
             <Button
-                x:Name="CounterBtn"
-                Text="Go to Your Table" 
-                Clicked="OnCounterClicked"
+                Text="Submit Response"
+                Clicked="OnSubmitResponseClicked"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
