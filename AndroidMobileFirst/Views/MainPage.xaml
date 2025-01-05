@@ -15,7 +15,7 @@
 
             <Label
                 x:Name="ResponseLabel"
-                Text="Response will be displayed here"
+                Text="Do you remember this?"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Response from OllamaService" />
@@ -25,9 +25,9 @@
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2" />
 
-            <StackLayout Orientation="Horizontal">
-                <RadioButton x:Name="Option1" Content="Option 1" GroupName="UserResponse" />
-                <RadioButton x:Name="Option2" Content="Option 2" GroupName="UserResponse" />
+            <StackLayout Orientation="Vertical">
+                <RadioButton x:Name="Option1" Content="Agree" GroupName="UserResponse" />
+                <RadioButton x:Name="Option2" Content="Disagree" GroupName="UserResponse" />
             </StackLayout>
 
             <Button

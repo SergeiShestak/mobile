@@ -1,16 +1,18 @@
-﻿
+﻿using AndroidMobileFirst.Views;
 
 namespace AndroidMobileFirst;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
-	}
+    public App()
+    {
+        InitializeComponent();
 
-	protected override Window CreateWindow(IActivationState? activationState)
-	{
-		return new Window(new AppShell());
-	}
+        MainPage = new NavigationPage(new GreetingPage());
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
+    }
 }
