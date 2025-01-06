@@ -1,31 +1,10 @@
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using AndroidMobileFirst.Enums;
+using AndroidMobileFirst.Models;
 
 namespace AndroidMobileFirst.Services;
-
-public enum ChatRole
-{
-    User,
-    Assistant
-}
-
-public class ChatMessage
-{
-    public ChatRole Role { get; set; }
-    public string Text { get; set; }
-
-    public ChatMessage(ChatRole role, string text)
-    {
-        Role = role;
-        Text = text;
-    }
-}
-
-public interface IChatClient
-{
-    IAsyncEnumerator<ChatMessage> CompleteStreamingAsync(List<ChatMessage> chatHistory);
-}
 
 public class OllamaChatClient : IChatClient
 {
@@ -40,7 +19,7 @@ public class OllamaChatClient : IChatClient
         _httpClient = new HttpClient();
     }
 
-    public async IAsyncEnumerator<ChatMessage> CompleteStreamingAsync(List<ChatMessage> chatHistory)
+    public async IAsyncEnumerable<ChatMessage> CompleteStreamingAsync(List<ChatMessage> chatHistory)
     {
         var request = new HttpRequestMessage(HttpMethod.Post, _ollamaUri);
         request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "your_token");

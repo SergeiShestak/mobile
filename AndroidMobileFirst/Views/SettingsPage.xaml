@@ -14,7 +14,25 @@
             Style="{StaticResource Headline}"
             SemanticProperties.HeadingLevel="Level1" />
 
-        <!-- Add your settings controls here -->
+        <Button
+            Text="Give your context"
+            Clicked="OnGiveYourContextClicked"
+            HorizontalOptions="Fill"/>
+
+        <Label
+            Text="Your LLM operator is:"
+            Style="{StaticResource Body}"
+            SemanticProperties.HeadingLevel="Level2" />
+        
+        <Entry
+            x:Name="LlmOperatorEntry"
+            Placeholder="Enter your LLM operator"
+            Text="{Binding LlmOperator}"
+            HorizontalOptions="Fill"/>
+        <Button
+            Text="Save"
+            Clicked="OnSaveClicked"
+            HorizontalOptions="Fill"/>
 
     </VerticalStackLayout>
 </ContentPage>

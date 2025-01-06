@@ -34,8 +34,8 @@ public partial class StartedPage : ContentPage
 
     private void OnSubmitResponseClicked(object sender, EventArgs e)
     {
-        string userResponse = Option1.IsChecked ? "Option 1" : Option2.IsChecked ? "Option 2" : string.Empty;
-        bool isCorrect = ResponseComparer.CompareResponse(userResponse, "Expected Answer");
+        _ollamaService.IsSummaryTrue = Option1.IsChecked ? "Agree" : Option2.IsChecked ? "Disagree" : string.Empty;
+        bool isCorrect = ResponseComparer.CompareResponse(_ollamaService.IsSummaryTrue, "Expected Answer");
         DisplayAlert("Response", isCorrect ? "Correct!" : "Incorrect!", "OK");
     }
 }

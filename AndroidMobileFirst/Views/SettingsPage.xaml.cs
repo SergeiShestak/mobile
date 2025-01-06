@@ -4,12 +4,12 @@ namespace AndroidMobileFirst.Views;
 
 public partial class SettingsPage : ContentPage
 {
-    private readonly LlmService _ollamaService;
+    private readonly LlmService _llmService;
 
     public SettingsPage()
     {
         InitializeComponent();
-        _ollamaService = new LlmService();
+        _llmService = new LlmService();
     }
 
     private void OnGiveYourContextClicked(object sender, EventArgs e)
@@ -22,7 +22,7 @@ public partial class SettingsPage : ContentPage
         string llmOperatorUrl = LlmOperatorEntry.Text;
         if (!string.IsNullOrEmpty(llmOperatorUrl))
         {
-            _ollamaService.SetBaseUrl(llmOperatorUrl);
+            _llmService.SetBaseUrl(llmOperatorUrl);
             DisplayAlert("Success", "LLM operator URL saved successfully.", "OK");
         }
         else

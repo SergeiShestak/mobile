@@ -1,9 +1,14 @@
+using AndroidMobileFirst.Services;
+
 namespace AndroidMobileFirst.Views;
+
 public partial class FileUploadPage : ContentPage
 {
+    private readonly LlmService _llmService;
     public FileUploadPage()
     {
         InitializeComponent();
+        _llmService = new LlmService();
     }
 
     private async void OnSelectFileClicked(object sender, EventArgs e)
@@ -54,6 +59,7 @@ public partial class FileUploadPage : ContentPage
             await stream.CopyToAsync(newStream);
         }
 
+        _llmService.ContextUri = new Uri(newFilePath);
         await DisplayAlert("File Saved", $"File saved to {newFilePath}", "OK");
     }
 }

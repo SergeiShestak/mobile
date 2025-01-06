@@ -3,6 +3,7 @@ using System.Text;
 using Newtonsoft.Json;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
+using AndroidMobileFirst.Models;
 
 
 namespace AndroidMobileFirst.Services;
@@ -12,6 +13,8 @@ public class LlmService
     private readonly HttpClient _httpClient;
 
     public Uri ContextUri { get; set; }
+
+    public string IsSummaryTrue { get; set; }
 
     public async Task CompletingStreamingAsync(List<ChatMessage> chatHistory = null)
     {
@@ -26,8 +29,7 @@ public class LlmService
 
         while (true)
         {
-            var userPrompt = Console.ReadLine();
-            chatHistory.Add(new ChatMessage(Enums.ChatRole.User, userPrompt));
+            chatHistory.Add(new ChatMessage(Enums.ChatRole.User, IsSummaryTrue));
 
             // Stream the AI response
             Console.WriteLine("AI Response:");
@@ -85,8 +87,6 @@ public class LlmService
             throw new HttpRequestException($"Request failed with status code {response.StatusCode}");
         }
     }
-
-
 
     private class ApiResponse
     {
