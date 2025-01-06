@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndroidMobileFirst.Views.StartedPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                x:Name="ResponseLabel"
+                Text="Do you remember this?"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Response from OllamaService" />
+
+            <Label
+                Text="Your Response:"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2" />
+
+            <StackLayout Orientation="Vertical">
+                <RadioButton x:Name="Option1" Content="Agree" GroupName="UserResponse" />
+                <RadioButton x:Name="Option2" Content="Disagree" GroupName="UserResponse" />
+            </StackLayout>
+
+            <Button
+                Text="Submit Response"
+                Clicked="OnSubmitResponseClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

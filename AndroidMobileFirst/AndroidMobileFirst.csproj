@@ -60,6 +60,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="iText.Kernel.Core" Version="1.0.2" />
+		<PackageReference Include="Microsoft.Extensions.AI" Version="9.0.1-preview.1.24570.5" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="NewtonSoft.Json" Version="13.0.3" />

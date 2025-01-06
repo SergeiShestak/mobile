@@ -1,41 +1,19 @@
-using AndroidMobileFirst.Services;
-
 namespace AndroidMobileFirst.Views;
 
 public partial class MainPage : ContentPage
 {
-    private readonly OllamaService _ollamaService;
-
     public MainPage()
     {
         InitializeComponent();
-        _ollamaService = new OllamaService();
-        DisplayResponse();
     }
 
-    private async void OnTableClicked(object sender, EventArgs e)
+    private async void OnGetStartedClicked(object sender, EventArgs e)
     {
-        // Navigate to the FileUploadPage when the button is clicked
-        await Navigation.PushAsync(new FileUploadPage());
+        await Navigation.PushAsync(new StartedPage());
     }
 
-    private async void DisplayResponse()
+    private async void OnSettingsClicked(object sender, EventArgs e)
     {
-        try
-        {
-            string response = await _ollamaService.GetResponseAsync("Your query here");
-            ResponseLabel.Text = response;
-        }
-        catch (Exception ex)
-        {
-            ResponseLabel.Text = $"Error: {ex.Message}";
-        }
-    }
-
-    private void OnSubmitResponseClicked(object sender, EventArgs e)
-    {
-        string userResponse = Option1.IsChecked ? "Option 1" : Option2.IsChecked ? "Option 2" : string.Empty;
-        bool isCorrect = ResponseComparer.CompareResponse(userResponse, "Expected Answer");
-        DisplayAlert("Response", isCorrect ? "Correct!" : "Incorrect!", "OK");
+        await Navigation.PushAsync(new SettingsPage());
     }
 }
