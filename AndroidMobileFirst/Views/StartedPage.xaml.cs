@@ -4,38 +4,25 @@ namespace AndroidMobileFirst.Views;
 
 public partial class StartedPage : ContentPage
 {
-    private readonly LlmService _ollamaService;
+    private readonly LlmService _llmService;
 
     public StartedPage()
     {
         InitializeComponent();
-        _ollamaService = new LlmService();
+        _llmService = new LlmService();
         DisplayResponse();
-    }
-
-    private async void OnTableClicked(object sender, EventArgs e)
-    {
-        // Navigate to the FileUploadPage when the button is clicked
-        await Navigation.PushAsync(new FileUploadPage());
     }
 
     private async void DisplayResponse()
     {
-        try
-        {
-            string response = await _ollamaService.GetResponseAsync("Your query here");
+            string response = await _llmService.GetResponseAsync("Hello from MAUI lets get started!");
             ResponseLabel.Text = response;
-        }
-        catch (Exception ex)
-        {
-            ResponseLabel.Text = $"Error: {ex.Message}";
-        }
     }
 
     private void OnSubmitResponseClicked(object sender, EventArgs e)
     {
-        _ollamaService.IsSummaryTrue = Option1.IsChecked ? "Agree" : Option2.IsChecked ? "Disagree" : string.Empty;
-        bool isCorrect = ResponseComparer.CompareResponse(_ollamaService.IsSummaryTrue, "Expected Answer");
+        _llmService.IsSummaryTrue = Option1.IsChecked ? "Agree" : Option2.IsChecked ? "Disagree" : string.Empty;
+        bool isCorrect = ResponseComparer.CompareResponse(_llmService.IsSummaryTrue, "Expected Answer");
         DisplayAlert("Response", isCorrect ? "Correct!" : "Incorrect!", "OK");
     }
 }

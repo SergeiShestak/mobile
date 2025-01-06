@@ -1,58 +1,41 @@
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using AndroidMobileFirst.Enums;
-using AndroidMobileFirst.Models;
+using OllamaSharp;
+using OllamaSharp.Models.Chat;
 
 namespace AndroidMobileFirst.Services;
 
 public class OllamaChatClient : IChatClient
 {
-    private readonly Uri _ollamaUri;
-    private readonly string _model;
-    private readonly HttpClient _httpClient;
-
-    public OllamaChatClient(Uri ollamaUri, string model)
+    private readonly OllamaApiClient _ollama;
+    public OllamaChatClient(Uri uri, string model)
     {
-        _ollamaUri = ollamaUri;
-        _model = model;
-        _httpClient = new HttpClient();
+        _ollama = new OllamaApiClient(uri);
+        _ollama.SelectedModel = model;
     }
 
-    public async IAsyncEnumerable<ChatMessage> CompleteStreamingAsync(List<ChatMessage> chatHistory)
+    public async IAsyncEnumerable<Message> CompleteStreamingAsync(List<Message> chatHistory)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, _ollamaUri);
-        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "your_token");
-
-        var payload = new
+        var request = new ChatRequest
         {
-            model = _model,
-            prompt = string.Join("\n", chatHistory.Select(m => m.Text)),
-            max_tokens = 2048,
-            temperature = 0.7
+            Model = _ollama.SelectedModel,
+            Messages = chatHistory.Select(m => new Message(
+                m.Role,
+                m.Content
+            )).ToList()
         };
 
-        request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
-
-        var response = await _httpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
-        var responseBody = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<ChatResponse>(responseBody);
-
-        foreach (var message in result.choices)
+        await foreach (var response in _ollama.ChatAsync(request, CancellationToken.None))
         {
-            yield return new ChatMessage(ChatRole.Assistant, message.text);
+            yield return new Message();
         }
     }
 }
 
 public class ChatResponse
 {
-    public List<Choice> choices { get; set; }
+    public List<Choice> Choices { get; set; }
 }
 
 public class Choice
 {
-    public string text { get; set; }
+    public string Text { get; set; }
 }

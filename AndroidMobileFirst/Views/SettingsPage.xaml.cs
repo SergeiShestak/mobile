@@ -22,7 +22,6 @@ public partial class SettingsPage : ContentPage
         string llmOperatorUrl = LlmOperatorEntry.Text;
         if (!string.IsNullOrEmpty(llmOperatorUrl))
         {
-            _llmService.SetBaseUrl(llmOperatorUrl);
             DisplayAlert("Success", "LLM operator URL saved successfully.", "OK");
         }
         else

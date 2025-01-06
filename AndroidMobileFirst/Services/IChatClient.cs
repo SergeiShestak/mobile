@@ -1,9 +1,10 @@
 using AndroidMobileFirst.Models;
+using OllamaSharp.Models.Chat;
 
 namespace AndroidMobileFirst.Services
 {
     public interface IChatClient
     {
-           IAsyncEnumerable<ChatMessage> CompleteStreamingAsync(List<ChatMessage> chatHistory);
+           IAsyncEnumerable<Message> CompleteStreamingAsync(List<Message> chatHistory);
     }
 }
